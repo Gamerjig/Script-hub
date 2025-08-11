@@ -1,1 +1,126 @@
+local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
+local GUI = Mercury:Create{
+    Name = "Debug",
+    Size = UDim2.fromOffset(600, 400),
+    Theme = Mercury.Themes.Dark,
+    Link = "TrollGeniuss on YT"
+}
+
+local function dex()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Dark-Dex-19903"))()
+end
+
+local function Spy()
+    local owner = "Upbolt"
+    local branch = "revision"
+
+    local function webImport(file)
+    return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Hydroxide/%s/%s.lua"):format(owner, branch, file)), file .. '.lua')()
+    end
+
+    webImport("init")
+    webImport("ui/main")
+end
+
+local function Executortest()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/zryr/executor-test-panel/refs/heads/main/panel.lua"))()
+end
+
+local function orca()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Orca-7620"))()
+end
+
+local function invis()
+    local key = Enum.KeyCode.C
+
+    local invis_on = false
+    function onKeyPress(inputObject, chat)
+        if chat then return end
+        if inputObject.KeyCode == key then
+            invis_on = not invis_on
+            if invis_on then
+                local savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                wait()
+                game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-25.95, 84, 3537.55))
+                wait(.15)
+                local Seat = Instance.new('Seat', game.Workspace)
+                Seat.Anchored = false
+                Seat.CanCollide = false
+                Seat.Name = 'invischair'
+                Seat.Transparency = 1
+                Seat.Position = Vector3.new(-25.95, 84, 3537.55)
+                local Weld = Instance.new("Weld", Seat)
+                Weld.Part0 = Seat
+                Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("Torso") or game.Players.LocalPlayer.Character.UpperTorso
+                wait()
+                Seat.CFrame = savedpos
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Invis On";
+                    Duration = 1;
+                    Text = "";
+                })
+            else
+                workspace:FindFirstChild('invischair'):Remove()
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Invis Off";
+                    Duration = 1;
+                    Text = "";
+                })
+            end
+        end
+    end
+
+    game:GetService("UserInputService").InputBegan:connect(onKeyPress)
+end
+
+local function qcmd()
+    loadstring(game:HttpGet("https://gist.github.com/someunknowndude/38cecea5be9d75cb743eac8b1eaf6758/raw"))()
+end
+
+
+local Debug = GUI:Tab{
+	Name = "Debug",
+	Icon = "rbxassetid://8569322835"
+}
+
+local Scripts = GUI:Tab{
+	Name = "Scripts",
+	Icon = "rbxassetid://8569322835"
+}
+
+Debug:Button{
+	Name = "Dex",
+	Description = "Opens Dark Dex",
+	Callback = dex
+}
+
+Debug:Button{
+	Name = "Hydroxide",
+	Description = "Spy",
+	Callback = Spy
+}
+
+Debug:Button{
+	Name = "Executor Test",
+	Description = "Test",
+	Callback = Executortest
+}
+
+Scripts:Button{
+	Name = "Orca",
+	Description = "orca",
+	Callback = orca
+}
+
+Scripts:Button{
+	Name = "Invis",
+	Description = "invis",
+	Callback = invis
+}
+
+Scripts:Button{
+	Name = "QCMD",
+	Description = "QCMD",
+	Callback = qcmd
+}
